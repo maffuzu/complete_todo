@@ -8,12 +8,17 @@ let app = express();
 
 let db;
 
+let port = process.env.PORT
+if (port == null || port == "") {
+  port = 3000
+}
+
 app.use(express.static('public'))
 
 let connectionString = 'mongodb+srv://todoAppUser:maffuzu1995@cluster0.dlbyz.mongodb.net/todoApp?retryWrites=true&w=majority';
 mongodb.connect(connectionString, {useNewUrlParser: true, useUnifiedTopology: true}, function(err, client) {
   db = client.db();
-  app.listen(process.enc.PORT || 3000);
+  app.listen(port);
 });
 
 app.use(express.json());
